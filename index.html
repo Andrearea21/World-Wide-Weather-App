@@ -16,6 +16,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="src/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="container weather-app">
@@ -32,7 +33,7 @@
             
             <div class="row">
           <div class="col">
-           <h1>Copenhagen</h1>
+           <h1 id="city"></h1>
         </div>
 
         <div class="row">
@@ -42,7 +43,7 @@
           </div>
           <div class="col">
             <ul>
-              <li>12°<span>C</span> | <span>F</span></li>
+              <li><span id="temperature"></span>°<span>C</span> | <span>F</span></li>
               <li>
                 wind: <span>5 </span><span>km/h</span> | <span>mph</span>
               </li>
