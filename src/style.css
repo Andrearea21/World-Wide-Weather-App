@@ -16,11 +16,12 @@ body {
 }
 h1 {
   color: #385170;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 100;
   line-height: 30px;
 }
-h2 {
+h2,
+ul {
   color: #385170;
   font-size: 15px;
   font-weight: 100;
@@ -47,8 +48,16 @@ h2 {
 .search-button {
   background-color: #142d4c;
   border: none;
+  margin:
   padding: 3px;
 }
 footer {
   font-size: 10px;
+  margin: 12px;
+}
+ul {
+  list-style-type: none;
+}
+.search-field {
+  margin: 20px 5px 20px 12px;
 }
