@@ -6,31 +6,49 @@ body {
   margin: 20px auto;
   padding: 20 px;
   border: 2px solid;
+  border-color: #142d4c;
   border-radius: 10px;
+  background: linear-gradient(
+    181.2deg,
+    rgb(181, 239, 249) 10.5%,
+    rgb(254, 254, 254) 86.8%
+  );
 }
 h1 {
-  color: black
+  color: #385170;
   font-size: 25px;
   font-weight: 100;
   line-height: 30px;
 }
 h2 {
-    color: black;
-    font-size: 15px;
-    font-weight: 100;
-    line-height: 18px;
+  color: #385170;
+  font-size: 15px;
+  font-weight: 100;
+  line-height: 18px;
 }
-.week-day, .description{
-    color: black;
-    font-size: 18px;
-    font-weight: 50;
-    line-height: 20px;
-    display: center;
-
+.week-day,
+.description {
+  color: #385170;
+  font-size: 18px;
+  font-weight: 50;
+  line-height: 20px;
 }
-
-.small-icon{
-    font-size: 30px;
-    display: center;
+.big-icon,
+.small-icon {
+  color: #142d4c;
+  display: center;
 }
-
+.big-icon {
+  font-size: 50px;
+}
+.small-icon {
+  font-size: 30px;
+}
+.search-button {
+  background-color: #142d4c;
+  border: none;
+  padding: 3px;
+}
+footer {
+  font-size: 10px;
+}
