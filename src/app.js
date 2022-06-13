@@ -50,7 +50,6 @@ function search(city) {
   let apiKey = "298f9405a9a634fd43294220b3f6b208";
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiURL).then(showCurrentWeather);
-  //console.log(document.querySelector("#city-input").value);
 }
 
 function handleSubmit(event) {
@@ -61,3 +60,5 @@ function handleSubmit(event) {
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+search("Copenhagen");
