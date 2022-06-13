@@ -41,7 +41,21 @@ function showCurrentWeather(response) {
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
 
-let apiKey = "298f9405a9a634fd43294220b3f6b208";
-let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${apiKey}&units=metric`;
+function getWeather(event) {
+  let apiKey = "298f9405a9a634fd43294220b3f6b208";
+  let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=`;
+  let displayedCity = document.querySelector("#city-search").value;
+  axios
+    .get(`${apiURL}${displayedCity}&appid=${apiKey}&units=metric`)
+    .then(showCurrentWeather);
+}
 
-axios.get(apiURL).then(showCurrentWeather);
+function nameCity(event) {
+  event.preventDefault();
+  let citySearch = document.querySelector("#city-search-field");
+  let cityName = document.querySelector("#city-name");
+  cityName.innerHTML = citySearch.value;
+}
+let searchField = document.querySelector("#city-search-field");
+searchField.addEventListener("submit", nameCity);
+searchField.addEventListener("submit", getWeather);
