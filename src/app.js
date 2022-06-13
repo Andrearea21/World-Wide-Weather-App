@@ -24,8 +24,8 @@ function formatDate(timestamp) {
 function showCurrentWeather(response) {
   let temperatureElement = Math.round(response.data.main.temp);
   let currentTemperature = document.querySelector("#temperature");
-  let currentCity = document.querySelector("#city");
-  let cityElement = response.data.name;
+  let currentCity = document.querySelector("#city-input").value;
+  let cityElement = document.querySelector("#city-name");
   let windSpeed = document.querySelector("#wind");
   let windElement = Math.round(response.data.wind.speed);
   let currentHumidity = document.querySelector("#humidity");
@@ -34,28 +34,25 @@ function showCurrentWeather(response) {
   let descriptionElement = response.data.weather[0].description;
   let dateElement = document.querySelector("#date");
   currentTemperature.innerHTML = `${temperatureElement}`;
-  currentCity.innerHTML = `${cityElement}`;
+  cityElement.innerHTML = `${currentCity}`;
   windSpeed.innerHTML = `${windElement} `;
   currentHumidity.innerHTML = `${humidityElement}`;
   currentDescription.innerHTML = `${descriptionElement}`;
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
 
-function getWeather(event) {
+function search(city) {
   let apiKey = "298f9405a9a634fd43294220b3f6b208";
-  let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=`;
-  let displayedCity = document.querySelector("#city-search").value;
-  axios
-    .get(`${apiURL}${displayedCity}&appid=${apiKey}&units=metric`)
-    .then(showCurrentWeather);
+  let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiURL).then(showCurrentWeather);
+  //console.log(document.querySelector("#city-input").value);
 }
 
-function nameCity(event) {
+function handleSubmit(event) {
   event.preventDefault();
-  let citySearch = document.querySelector("#city-search-field");
-  let cityName = document.querySelector("#city-name");
-  cityName.innerHTML = citySearch.value;
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+  console.log(cityInputElement.value);
 }
-let searchField = document.querySelector("#city-search-field");
-searchField.addEventListener("submit", nameCity);
-searchField.addEventListener("submit", getWeather);
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
