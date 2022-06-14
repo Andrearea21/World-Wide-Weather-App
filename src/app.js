@@ -21,6 +21,31 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class=row`;
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+          <div class="col-2">
+            <div class="week-day">${day}</div>
+            <div class="small-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+            <div class="weather-forecast-temperature">
+                <span class="weather-forecast-temperature-max">18°</span>
+                <span class="weather-forecast-temperature-min">8°</span>
+            </div>
+            <div class="description">partly cloudy</div>`;
+
+    forecastHTML = forecastHTML + `</div>`;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+
+}
+
 function showCurrentWeather(response) {
   let temperatureElement = Math.round(response.data.main.temp);
   let currentTemperature = document.querySelector("#temperature");
@@ -90,4 +115,5 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperatures);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
+displayForecast();
 search("Copenhagen");
