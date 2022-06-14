@@ -34,6 +34,9 @@ function showCurrentWeather(response) {
   let descriptionElement = response.data.weather[0].description;
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#big-icon");
+
+  celsiusTemperature = response.data.main.temp;
+
   currentTemperature.innerHTML = `${temperatureElement}`;
   cityElement.innerHTML = `${currentCity}`;
   windSpeed.innerHTML = `${windElement} `;
@@ -60,5 +63,31 @@ function handleSubmit(event) {
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+//unit conversion
+let celsiusTemperature = null;
+
+function displayFahrenheitTemperatures(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+}
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperatures);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Copenhagen");
