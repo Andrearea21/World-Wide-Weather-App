@@ -14,6 +14,17 @@ body {
     rgb(254, 254, 254) 86.8%
   );
 }
+.forecast .icon-small {
+  text-align: center;
+  display: center;
+  margin: 1px;
+}
+
+.icon-small {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .current-city {
   margin-left: 0;
 }
@@ -40,11 +51,7 @@ ul {
 .description {
   font-size: 10px;
 }
-.big-icon,
-.small-icon {
-  color: #142d4c;
-  display: center;
-}
+
 .big-icon {
   font-size: 50px;
 }
@@ -77,12 +84,6 @@ ul {
 }
 .units .active:hover {
   text-decoration: none;
-}
-
-.weather-forecast {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 10px;
 }
 
 .weather-forecast-temperature-min {
