@@ -30,7 +30,6 @@ function formatForecastDate(timestamp) {
 }
 
 function displayForecast(response) {
-  console.log(response.data);
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
@@ -118,7 +117,6 @@ function handleSubmit(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-//unit conversion
 let celsiusTemperature = null;
 
 function displayFahrenheitTemperatures(event) {
