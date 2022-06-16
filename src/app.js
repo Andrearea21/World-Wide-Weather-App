@@ -20,38 +20,58 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
+function formatForecastDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
 
 function displayForecast(response) {
+  console.log(response.data);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row"`;
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-          <div class="col-2">
-            <div class="week-day">${day}</div>
-            <div class="small-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6 || index > 0) {
+      forecastHTML =
+        forecastHTML +
+        ` <div class="col-2">
+            <div class="week-day">${formatForecastDate(forecastDay.dt)}</div>
+            <div>
+              <img
+               src ="http://openweathermap.org/img/wn/${
+                 forecastDay.weather[0].icon
+               }@2x.png"
+                alt= "weather icon"
+               />
+              </div>
             <div class="weather-forecast-temperature">
-                <span class="weather-forecast-temperature-max">18°</span>
-                <span class="weather-forecast-temperature-min">8°</span>
+                <span class="weather-forecast-temperature-max">${Math.round(
+                  forecastDay.temp.max
+                )}°</span>
+                <span class="weather-forecast-temperature-min">${Math.round(
+                  forecastDay.temp.min
+                )}°</span>
             </div>
-            <div class="description">partly cloudy</div>`;
+            <div class="description">${
+              forecastDay.weather[0].description
+            }</div>`;
 
-    forecastHTML = forecastHTML + `</div>`;
+      forecastHTML = forecastHTML + `</div>`;
+    }
+
+    forecastElement.innerHTML = forecastHTML;
   });
-
-  forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
   let apiKey = "6db953501a1796221633635ef5980630";
-  //let longitude = coordinates.lon;
-  // let latitude = coordinates.lat;
-  let apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`;
-  //axios.get(apiURL).then(displayForecast);
-  console.log(apiURL);
+  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiURL).then(displayForecast);
 }
 
 function showCurrentWeather(response) {
@@ -124,5 +144,4 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperatures);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
-displayForecast();
 search("Copenhagen");
