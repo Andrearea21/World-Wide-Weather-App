@@ -38,27 +38,27 @@ function displayForecast(response) {
     if (index < 7 && index > 0) {
       forecastHTML =
         forecastHTML +
-        ` <div class="col-2 forecast">
-            <div class="week-day">${formatForecastDate(forecastDay.dt)}</div>
-            <div>
-              <img class= "icon-small"
-               src ="http://openweathermap.org/img/wn/${
-                 forecastDay.weather[0].icon
-               }@2x.png"
-                alt= "weather icon"
-               />
-              </div>
-            <div class="weather-forecast-temperature">
-                <span class="weather-forecast-temperature-max">${Math.round(
-                  forecastDay.temp.max
-                )}°</span>
-                <span class="weather-forecast-temperature-min">${Math.round(
-                  forecastDay.temp.min
-                )}°</span>
-            </div>
-            <div class="description">${
-              forecastDay.weather[0].description
-            }</div>`;
+        `  <div class="col-2 forecast">
+        <div class="weather-forecast-date">${formatForecastDate(
+          forecastDay.dt
+        )}</div>
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="60"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max"> ${Math.round(
+            forecastDay.temp.max
+          )}° </span>
+          <span class="weather-forecast-temperature-min"> ${Math.round(
+            forecastDay.temp.min
+          )}° </span>
+        </div>
+        <div class="description">${forecastDay.weather[0].description}</div>
+      </div>`;
 
       forecastHTML = forecastHTML + `</div>`;
     }
@@ -66,7 +66,6 @@ function displayForecast(response) {
     forecastElement.innerHTML = forecastHTML;
   });
 }
-
 function getForecast(coordinates) {
   let apiKey = "6db953501a1796221633635ef5980630";
   let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
